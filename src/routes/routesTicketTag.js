@@ -23,6 +23,6 @@ router.post('/', createTicketTag)
 
 router.put('/:ticketTagID', updateTicketTag)
 
-router.delete('/:ticketID', deleteTicketTag)
+router.delete('/:ticketTagID', deleteTicketTag)
 
 module.exports = router
