@@ -46,7 +46,7 @@ const createTicketTag = async (req, res) => {
 const updateTicketTag = async (req, res) => {
     try {
         const { ticket, tag } = req.body;
-        const ticketTag = await TicketTag.findById(req.params.ticketTagID);
+        const ticketTag = await TicketTag.findOne({ _id: req.params.ticketTagID })
 
         if (!ticketTag) {
             return res.status(404).json({ msg: 'TicketTag not found' });
@@ -65,7 +65,7 @@ const updateTicketTag = async (req, res) => {
 
 const deleteTicketTag = async (req, res) => {
     try {
-        const ticketTag = await TicketTag.findById(req.params.ticketTagID);
+        const ticketTag = await TicketTag.findOne({ _id: req.params.ticketTagID })
 
         if (!ticketTag) {
             return res.status(404).json({ msg: 'TicketTag not found' });

@@ -39,7 +39,7 @@ const createProject = async (req, res) => {
 const updateProject = async (req, res) => {
     try {
         const { name, description } = req.body;
-        const project = await Project.findById(req.params.projectID);
+        const project = await Project.findOne({ _id: req.params.projectID });
 
         if (!project) {
             return res.status(404).json({ msg: 'Project not found' });
@@ -59,7 +59,7 @@ const updateProject = async (req, res) => {
 
 const deleteProject = async (req, res) => {
     try {
-        const project = await Project.findById(req.params.projectID);
+        const project = await Project.findOne({ _id: req.params.projectID });
 
         if (!project) {
             return res.status(404).json({ msg: 'Project not found' });

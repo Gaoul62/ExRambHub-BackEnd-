@@ -49,7 +49,7 @@ const createDeveloper = async (req, res) => {
 const updateDeveloper = async (req, res) => {
     try {
         const { name, surname, email, password, position } = req.body;
-        const developer = await Developer.findById(req.params.developerID);
+        const developer = await Developer.findOne({ _id: req.params.developerID });
 
         if (!developer) {
             return res.status(404).json({ msg: 'Developer not found' });

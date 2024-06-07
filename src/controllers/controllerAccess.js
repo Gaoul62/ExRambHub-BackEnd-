@@ -47,7 +47,7 @@ const createAccess = async (req, res) => {
 const updateAccess = async (req, res) => {
     try {
         const { user, project, isSuper } = req.body;
-        const access = await Access.findById(req.params.accessID);
+        const access = await Access.findOne({ _id: req.params.accessID });
         if (!access) {
             return res.status(404).json({ msg: 'Access not found' });
         }
@@ -67,7 +67,7 @@ const updateAccess = async (req, res) => {
 
 const deleteAccess = async (req, res) => {
     try {
-        const access = await Access.findById(req.params.accessID);
+        const access = await Access.findOne({ _id: req.params.accessID });
 
         if (!access) {
             return res.status(404).json({ msg: 'Access not found' });

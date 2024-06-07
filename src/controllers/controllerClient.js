@@ -49,7 +49,7 @@ const createClient = async (req, res) => {
 const updateClient = async (req, res) => {
     try {
         const { name, surname, email, password, companyName } = req.body;
-        const client = await Client.findById(req.params.clientID);
+        const client = await Client.findOne({ _id: req.params.clientID });
 
         if (!client) {
             return res.status(404).json({ msg: 'Client not found' });

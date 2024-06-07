@@ -39,7 +39,7 @@ const createTag = async (req, res) => {
 const updateTag = async (req, res) => {
     try {
         const { title } = req.body;
-        const tag = await Tag.findById(req.params.tagID);
+        const tag = await Tag.findOne({ _id: req.params.tagID });
 
         if (!tag) {
             return res.status(404).json({ msg: 'Tag not found' });
@@ -57,7 +57,7 @@ const updateTag = async (req, res) => {
 
 const deleteTag = async (req, res) => {
     try {
-        const tag = await Tag.findById(req.params.tagID);
+        const tag = await Tag.findOne({ _id: req.params.tagID });
 
         if (!tag) {
             return res.status(404).json({ msg: 'Tag not found' });

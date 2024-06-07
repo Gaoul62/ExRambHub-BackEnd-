@@ -48,7 +48,7 @@ const createTicket = async (req, res) => {
 const updateTicket = async (req, res) => {
     try {
         const { title, description, status, priority, type, endDate, creator, assignee, project } = req.body;
-        const ticket = await Ticket.findById(req.params.ticketID);
+        const ticket = await Ticket.findOne({ _id: req.params.ticketID });
 
         if (!ticket) {
             return res.status(404).json({ msg: 'Ticket not found' });
@@ -74,7 +74,7 @@ const updateTicket = async (req, res) => {
 
 const deleteTicket = async (req, res) => {
     try {
-        const ticket = await Ticket.findById(req.params.ticketID);
+        const ticket = await Ticket.findOne({ _id: req.params.ticketID });
 
         if (!ticket) {
             return res.status(404).json({ msg: 'Ticket not found' });
