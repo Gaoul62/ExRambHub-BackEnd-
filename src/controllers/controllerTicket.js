@@ -31,6 +31,7 @@ const createTicket = async (req, res) => {
             type,
             dateCreation: new Date(),
             endDate: new Date(endDate),
+            lastModification: new Date(Date.now()),
             creator,
             assignee,
             project
@@ -60,6 +61,7 @@ const updateTicket = async (req, res) => {
         ticket.priority = priority;
         ticket.type = type;
         ticket.endDate = new Date(endDate);
+        ticket.lastModification = new Date(Date.now());
         ticket.creator = creator;
         ticket.assignee = assignee;
         ticket.project = project;
