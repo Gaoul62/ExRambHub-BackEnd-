@@ -1,5 +1,6 @@
 const Client = require('../collections/client.js')
 const mongoose = require('mongoose')
+const encryptionHelper = require('../helpers/encryptionHelper.js')
 
 const getClients = ((req, res) => {
     Client.find({})
@@ -14,7 +15,8 @@ const getClient = ((req, res) => {
 })
 
 const getClientByAuth = ((req, res) => {
-    Client.findOne({ email: req.body.email, password: req.body.password })
+    const hashedPassword = encryptionHelper.hashStringWithKey(req.body.password)
+    Client.findOne({ email: req.body.email, password: hashedPassword })
         .then(result => res.status(200).json({ result }))
         .catch(() => res.status(404).json({msg: 'Client not found'}))
 })
@@ -28,6 +30,7 @@ const getClientByEmail = ((req, res) => {
 const createClient = async (req, res) => {
     try {
         const { name, surname, email, password, companyName } = req.body;
+        password = encryptionHelper.hashStringWithKey(password);
         const newClient = new Client({
             _id: new mongoose.Types.ObjectId(),
             name,
@@ -58,7 +61,7 @@ const updateClient = async (req, res) => {
         client.name = name;
         client.surname = surname;
         client.email = email;
-        client.password = password;
+        client.password = encryptionHelper.hashStringWithKey(password);
         client.companyName = companyName;
 
         const result = await client.save();

@@ -1,5 +1,6 @@
 const Developer = require('../collections/developer.js')
 const mongoose = require('mongoose')
+const encryptionHelper = require('../helpers/encryptionHelper.js')
 
 const getDevelopers = ((req, res) => {
     Developer.find({})
@@ -14,7 +15,8 @@ const getDeveloper = ((req, res) => {
 })
 
 const getDeveloperByAuth = ((req, res) => {
-    Developer.findOne({ email: req.body.email, password: req.body.password })
+    const hashedPassword = encryptionHelper.hashStringWithKey(req.body.password);
+    Developer.findOne({ email: req.body.email, password: hashedPassword })
         .then(result => res.status(200).json({ result }))
         .catch(() => res.status(404).json({msg: 'Developer not found'}))
 })
@@ -28,6 +30,7 @@ const getDeveloperByEmail = ((req, res) => {
 const createDeveloper = async (req, res) => {
     try {
         const { name, surname, email, password, position } = req.body;
+        password = encryptionHelper.hashStringWithKey(password);
         const newDeveloper = new Developer({
             _id: new mongoose.Types.ObjectId(),
             name,
@@ -58,7 +61,7 @@ const updateDeveloper = async (req, res) => {
         developer.name = name;
         developer.surname = surname;
         developer.email = email;
-        developer.password = password;
+        developer.password = encryptionHelper.hashStringWithKey(password);
         developer.position = position;
 
         const result = await developer.save();
