@@ -14,6 +14,7 @@ const comments_routes = require('./routes/routesComment.js');
 const accesses_routes = require('./routes/routesAccess.js');
 const tags_routes = require('./routes/routesTag.js');
 const ticketTags_routes = require('./routes/routesTicketTag.js');
+const subtasks_routes = require('./routes/routesSubtask.js');
 
 const port = process.env.PORT || 3000;
 const uri = process.env.MONGODB_URI;
@@ -31,6 +32,7 @@ app.use('/api/comments', comments_routes);
 app.use('/api/accesses', accesses_routes);
 app.use('/api/tags', tags_routes);
 app.use('/api/ticketTags', ticketTags_routes);
+app.use('/api/subtasks', subtasks_routes);
 
 app.listen(port, () => {
   console.log(`Server is running and listening on port ${port}`);
