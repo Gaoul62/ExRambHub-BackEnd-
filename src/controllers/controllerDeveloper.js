@@ -63,6 +63,7 @@ const updateDeveloper = async (req, res) => {
         developer.email = email;
         developer.password = encryptionHelper.hashStringWithKey(password);
         developer.position = position;
+        developer.lastLogin = new Date(Date.now());
 
         const result = await developer.save();
         res.status(200).json({ result });

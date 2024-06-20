@@ -7,7 +7,8 @@ const ClientSchema = new mongoose.Schema({
     surname: String,
     email: String,
     companyName: String,
-    password: String
+    password: String,
+    lastLogin: Date
 })
 
 const Client = mongoose.model('clients', ClientSchema)

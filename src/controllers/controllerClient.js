@@ -63,6 +63,7 @@ const updateClient = async (req, res) => {
         client.email = email;
         client.password = encryptionHelper.hashStringWithKey(password);
         client.companyName = companyName;
+        client.lastLogin = new Date(Date.now());
 
         const result = await client.save();
         res.status(200).json({ result });

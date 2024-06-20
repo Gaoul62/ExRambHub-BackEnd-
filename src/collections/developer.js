@@ -7,7 +7,8 @@ const DeveloperSchema = new mongoose.Schema({
     surname: String,
     email: String,
     position: String,
-    password: String
+    password: String,
+    lastLogin: Date
 })
 
 const Developer = mongoose.model('developers', DeveloperSchema)
