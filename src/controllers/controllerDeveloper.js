@@ -74,6 +74,25 @@ const updateDeveloper = async (req, res) => {
     }
 };
 
+const updateDeveloperLastLogin = async (req, res) => {
+    try {
+        const developer = await Developer.findOne({ _id: req.params.developerID });
+
+        if (!developer) {
+            return res.status(404).json({ msg: 'Developer not found' });
+        }
+
+        developer.lastLogin = new Date();
+
+        const result = await developer.save();
+        res.status(200).json({ result });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: 'An error occurred while updating the developer' });
+    }
+};
+
 const deleteDeveloper = ((req, res) => {
     Developer.findOneAndDelete({ _id: req.params.developerID })
         .then(result => res.status(200).json({ result }))
@@ -87,5 +106,6 @@ module.exports = {
     getDeveloperByEmail,
     createDeveloper,
     updateDeveloper,
+    updateDeveloperLastLogin,
     deleteDeveloper
 }

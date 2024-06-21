@@ -8,6 +8,7 @@ const  {
     getDeveloperByEmail,
     createDeveloper,
     updateDeveloper,
+    updateDeveloperLastLogin,
     deleteDeveloper
 } = require('../controllers/controllerDeveloper.js')
 
@@ -22,6 +23,8 @@ router.get('/email/:email', getDeveloperByEmail)
 router.post('/', createDeveloper)
 
 router.put('/:developerID', updateDeveloper)
+
+router.put('/lastLogin/:developerID', updateDeveloperLastLogin)
 
 router.delete('/:developerID', deleteDeveloper)
 

@@ -63,7 +63,25 @@ const updateClient = async (req, res) => {
         client.email = email;
         client.password = encryptionHelper.hashStringWithKey(password);
         client.companyName = companyName;
-        client.lastLogin = new Date(Date.now());
+
+        const result = await client.save();
+        res.status(200).json({ result });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: 'An error occurred while updating the client' });
+    }
+};
+
+const updateClientLastLogin = async (req, res) => {
+    try {
+        const client = await Client.findOne({ _id: req.params.clientID });
+
+        if (!client) {
+            return res.status(404).json({ msg: 'Client not found' });
+        }
+
+        client.lastLogin = new Date();
 
         const result = await client.save();
         res.status(200).json({ result });
@@ -87,5 +105,6 @@ module.exports = {
     getClientByEmail,
     createClient,
     updateClient,
+    updateClientLastLogin,
     deleteClient
 }

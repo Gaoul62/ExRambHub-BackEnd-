@@ -8,6 +8,7 @@ const  {
     getClientByEmail,
     createClient,
     updateClient,
+    updateClientLastLogin,
     deleteClient
 } = require('../controllers/controllerClient.js')
 
@@ -22,6 +23,8 @@ router.get('/email/:email', getClientByEmail)
 router.post('/', createClient)
 
 router.put('/:clientID', updateClient)
+
+router.put('/lastLogin/:clientID', updateClientLastLogin)
 
 router.delete('/:clientID', deleteClient)
 
