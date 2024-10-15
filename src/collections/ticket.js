@@ -9,6 +9,7 @@ const TicketSchema = new mongoose.Schema({
     priority: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Low' },
     type: { type: String, enum: ['Bug', 'Feature', 'Task'], required: true },
     dateCreation: { type: Date, default: Date.now },
+    startdate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     lastModification: { type: Date },
     creator: { type: ObjectId, required: true },

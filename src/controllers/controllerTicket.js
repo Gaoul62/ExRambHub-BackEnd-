@@ -21,7 +21,7 @@ const getTicketsByProject = ((req, res) => {
 
 const createTicket = async (req, res) => {
     try {
-        const { title, description, status, priority, type, endDate, creator, assignee, project } = req.body;
+        const { title, description, status, priority, type, startDate, endDate, creator, assignee, project } = req.body;
         const newTicket = new Ticket({
             _id: new mongoose.Types.ObjectId(),
             title,
@@ -30,6 +30,7 @@ const createTicket = async (req, res) => {
             priority,
             type,
             dateCreation: new Date(),
+            startdate: new Date(startDate),
             endDate: new Date(endDate),
             lastModification: new Date(Date.now()),
             creator,
