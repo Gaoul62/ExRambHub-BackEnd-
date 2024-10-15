@@ -51,7 +51,7 @@ const createTicket = async (req, res) => {
 
 const updateTicket = async (req, res) => {
     try {
-        const { title, description, status, priority, type, endDate, creator, assignee, project } = req.body;
+        const { title, description, status, priority, type, startDate, startDateTime, endDate, endDateTime, creator, assignee, project } = req.body;
         const ticket = await Ticket.findOne({ _id: req.params.ticketID });
 
         if (!ticket) {
@@ -63,7 +63,10 @@ const updateTicket = async (req, res) => {
         ticket.status = status || 'TODO';
         ticket.priority = priority;
         ticket.type = type;
+        ticket.startDate = new Date(startDate);
+        ticket.startDateTime = startDateTime;
         ticket.endDate = new Date(endDate);
+        ticket.endDateTime = endDateTime;
         ticket.lastModification = new Date(Date.now());
         ticket.creator = creator;
         ticket.assignee = assignee;
