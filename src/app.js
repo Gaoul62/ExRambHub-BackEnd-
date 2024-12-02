@@ -4,7 +4,9 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:8080', 'https://rambhub.vercel.app']
+}));
 
 const accesses_routes = require('./routes/routesAccess.js');
 const comments_routes = require('./routes/routesComment.js');
@@ -14,7 +16,7 @@ const tag_routes = require('./routes/routesTag.js');
 const tickets_routes = require('./routes/routesTicket.js');
 const ticketTags_routes = require('./routes/routesTicketTag.js');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const uri = process.env.MONGODB_URI;
 
 mongoose.connect(uri)
